@@ -3,7 +3,7 @@ import { Box, Heading } from "@chakra-ui/react";
 import useGameQueryStore from "../store/gameQueryStore";
 
 function GameHeading() {
-  const selectedGenreId = useGameQueryStore((state) => state.genreId);
+  const selectedGenreId = useGameQueryStore((state) => state.gameQuery.genreId);
   const { data: genres } = useGenres();
 
   return (

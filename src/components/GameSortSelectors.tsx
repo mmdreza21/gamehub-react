@@ -23,15 +23,15 @@ const sortOrderCollection = createListCollection({
 });
 
 function GameSortSelector() {
-  const sortBy = useGameQueryStore((state) => state.sortBy);
-  const sortOrder = useGameQueryStore((state) => state.sortOrder);
+  const sortBy = useGameQueryStore((state) => state.gameQuery.sortBy);
+  const sortOrder = useGameQueryStore((state) => state.gameQuery.sortOrder);
   const onSortByChange = useGameQueryStore((state) => state.setSortBy);
   const onSortOrderChange = useGameQueryStore((state) => state.setSortOrder);
   return (
     <HStack padding="10px" m={4}>
       <Select.Root
         collection={sortByCollection}
-        value={[sortBy]}
+        value={[sortBy as string]}
         onValueChange={(e) => onSortByChange(e.value[0])}
         width="220px"
         size="sm"
@@ -62,7 +62,7 @@ function GameSortSelector() {
 
       <Select.Root
         collection={sortOrderCollection}
-        value={[sortOrder]}
+        value={[sortOrder as string]}
         onValueChange={(e) => onSortOrderChange(e.value[0] as SortOrder)}
         width="150px"
         size="sm"

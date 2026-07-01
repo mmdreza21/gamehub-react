@@ -22,7 +22,7 @@ function GenreList() {
   const { data: genres, isLoading: loading } = useGenres();
   const [hoveredGenre, setHoveredGenre] = useState<string | null>(null);
 
-  const { genreId: selectedGenreId, setGenreId } = useGameQueryStore();
+  const { gameQuery: selectedGenreId, setGenreId } = useGameQueryStore();
 
   const handleClick = (genre: GenreDTO | null) => {
     setGenreId(genre?.id || null);
@@ -76,13 +76,17 @@ function GenreList() {
                 p={2}
                 borderRadius="md"
                 bg="transparent"
-                color={selectedGenreId === null ? "purple.600" : "gray.100"}
+                color={
+                  selectedGenreId.genreId === null ? "purple.600" : "gray.100"
+                }
               >
                 <Icon as={FaGamepad} boxSize={5} />
               </Box>
               <VStack align="start" m={0} flex="1">
                 <Text
-                  fontWeight={selectedGenreId === null ? "bold" : "semibold"}
+                  fontWeight={
+                    selectedGenreId.genreId === null ? "bold" : "semibold"
+                  }
                 >
                   All
                 </Text>
@@ -94,7 +98,7 @@ function GenreList() {
         {/* Genre Items */}
         {genres?.map((genre) => {
           const GenreIcon = getSpecificIconForGenre(genre.name);
-          const isSelected = selectedGenreId === genre.id;
+          const isSelected = selectedGenreId.genreId === genre.id;
           const isHovered = hoveredGenre === genre.id;
 
           return (
